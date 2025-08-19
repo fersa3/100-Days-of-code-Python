@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Cafes{% endblock %}
+
+{% block content %}
+
+		<!-- Page Wrapper -->
+			<script src="static/js/jquery.min.js"></script>
+
+{% include 'header.html' %}
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Todos los Cafés</h2>
+							<p>Echa un vistazo a todos los cafés que hemos encontrado por aquí</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<form method="POST">
+									{{ form.hidden_tag() }}
+									<div style="max-widht:1000px; padding-left:20%; padding-right:20%">
+										<ul class="actions special">
+											<li>{{ form.item_id() }}<br>
+												{% for error in form.item_id.errors %}
+													<span style="color: red;">[{{ error }}]</span>
+												{% endfor %}</li>
+											<li>{{ form.submit(class="primary") }}</li>
+										</ul>
+									</div>
+								</form>
+
+
+							<!-- Text -->
+								<section>
+									<p>Si no tenemos la Cafetería que estás buscando, puedes agregarla
+										en <b><a href="{{url_for('add_cafe')}}">Agregar un Café</a></b>.<br/> <br/>
+										Y si te sientes indeciso, siempre puedes consultar una <b>
+											<a href="{{url_for('get_random_cafe')}}">Tarjeta de Café Aleatorio</a></b>
+									<hr />
+								</section>
+
+							<!-- Coffee Cards -->
+								<section>
+								   <div class="container">
+									   {% for cafe in cafes %}
+									  <div class="row"  style="max-widht:1000px; padding-left:20%; padding-right:20%; padding-bottom:20px">
+											 <!--Profile Card 5-->
+											 <div class="col-12">
+												<a target="_blank" href={{ cafe.map_url }}>
+													<div class="card profile-card-5">
+														<div class="card-img-block">
+														<img class="card-img-top" src="{{ cafe.img_url }}" alt="Card image cap">
+														</div>
+														<div class="card-body pt-0">
+														<h5 class="card-title">{{ cafe.name }}</h5>
+														<p class="card-text">Amenities:
+															{% if cafe.has_sockets == 1 %}🔌{% endif %}
+															{% if cafe.has_toilet == 1 %}🚽{% endif %}
+															{% if cafe.has_wifi == 1 %}🛜{% endif %}
+															{% if cafe.can_take_calls == 1 %}📞{% endif %}
+															<br/>
+															Coffee price: {{ cafe.coffee_price }}</p>
+														<p class="card-text"><small class="text-muted">Ubicación: {{ cafe.location }}</small></p>
+														</div>
+													</div>
+												</a>
+											 </div>
+									  </div>
+									   {% endfor %}
+								   </div>
+								</section>
+
+
+							</div>
+						</section>
+					</article>
+
+				{% include 'footer.html' %}
+
+
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Add a Cafe{% endblock %}
+
+{% block content %}
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				{% include 'header.html' %}
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Agrega un Café</h2>
+							<p>En este espacio podrás agregar las cafeterías que descubras</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<section>
+									<!-- Poner en el grid al lado del random card -->
+									<div class="box alt" style="width:500px">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-2"><span class="image fit"><img src="static/images/coffee_icon.png" alt="" /></span></div>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h4>Agrega aquí toda la información del Café de Google Maps</h4>
+									<form method="POST" action="{{ url_for('update_price') }}">
+										{{ form.csrf_token }}
+										<input type="hidden" name="_method", value="PATCH">   <!-- Campo oculto para simular PATCH -->
+										<div class="row gtr-uniform">
+											{% for item in form %}
+												{% if item.label.text != "Actualizar" %}
+												<div class="col-12-xsmall">
+													{{ item.label }} {{ item }}
+												</div>
+												{% endif %}
+											{% endfor %}
+											<div class="col-12">
+												<ul class="actions">
+													<li> {{ form.submit(class="primary") }} </li>
+													<li><input type="reset" value="Vaciar" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</section>
+
+							</div>
+						</section>
+					</article>
+
+				{% include 'footer.html' %}
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+{% endblock %}

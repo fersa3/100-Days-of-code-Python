@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Coffee & Wifi{% endblock %}
+
+{% block content %}
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				{% include 'header.html' %}
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<p>¿Quieres trabajar desde una cafetería, pero no sabes dónde?</p>
+							<h2>Coffee Workforce ☕️💻</h2>
+							<p>Mira mi colección de cafés por zona con ratings para disponibilidad<br />
+							de sockets, calidad del WiFi y del café.</p>
+							<form method="POST">
+								{{ form.hidden_tag() }}
+								<div style="max-widht:1000px; padding-left:20%; padding-right:20%">
+									{{ form.item_id() }}<br>
+									{% for error in form.item_id.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+									{% endfor %}
+									<ul class="actions special">
+										<li>{{ form.submit(class="primary") }}</li>
+									</ul>
+								</div>
+							</form>
+
+							{% if results %}
+							<h2>Results:</h2>
+							<ul>
+								{% for result in results %}
+								<li>{{ result }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+
+
+						</div>
+					</section>
+
+				{% include 'footer.html' %}
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+{% endblock %}
