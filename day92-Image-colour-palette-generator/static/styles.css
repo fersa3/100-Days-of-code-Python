@@ -1,0 +1,120 @@
+
+body {
+    background-color: #FEF9F2;
+    text-align: center;
+}
+
+div{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+h1{
+    color: #789DBC;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 2%;
+}
+
+h3{
+    color: #686156;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding-bottom: 30px;
+}
+
+.ButtonZone {
+    padding-bottom: 30px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    align-items: center;
+    appearance: button;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #59936A;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 110%;
+    line-height: 1.15;
+    margin: 0;
+    padding: 15px 25px;
+    text-align: center;
+    text-transform: none;
+}
+
+.custom-file-upload:hover{
+    color: #2C4734;
+}
+
+input[type="submit"] {
+  align-items: center;
+    appearance: button;
+    background-color: #C9E9D2;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #59936A;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 110%;
+    line-height: 1.15;
+    margin: 0;
+    padding: 15px 25px;
+    text-align: center;
+    text-transform: none;
+}
+
+input[type="submit"]:hover{
+    background-color: #C0E0C9;
+}
+
+img {
+    padding-top: 30px;
+    color: #697A6D;
+    margin: 0 auto;
+    width: 500px;
+    max-height: fit-content;
+    padding: 10px;
+}
+
+.ColoursList {
+    color:#686156;
+    padding:20px;
+    margin: 0 auto;
+  }
+
+table { 
+    border-spacing: 1; 
+    border-collapse: collapse; 
+    background-color: #F6F1EA;
+    overflow: hidden;
+    border-radius: 6px;
+    max-width:800px; 
+    width:100%;
+    margin: 0 auto;
+
+    
+    td,th {padding: 8px;}
+
+  thead tr  { 
+    height:60px;
+    background:#686156;
+    font-size:16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #F6F1EA;
+    text-align: center;
+  }
+  
+  tbody tr        { height:48px; border-bottom:1px solid #FEF9F2 ;
+    &:last-child  { border:0; }
+  }
+}

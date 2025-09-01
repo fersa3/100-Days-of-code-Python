@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fer's Image Colour Palette Generator</title>
+    <link href="static/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="Welcome">
+        <h1>Fer's Image Colour Palette Generator</h1>
+        <hr>
+        <h3>Just drop your image here, and I'll give you a list of the 10 colors most used in that image.</h3>
+    </div>
+
+    <div class="ButtonZone">
+        <form action="{{ url_for('home') }}" enctype=multipart/form-data method="post">
+            <label for="file-upload" class="custom-file-upload">
+                Select your image here
+            </label>
+            <input id="file-upload" type="file" name="file" required/>
+            <input type="submit" value="Upload">
+        </form>
+        <!-- Adding Flash message here for wrong file formats -->
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="Image">
+        <img src="{{ url_for('static', filename=img_file) }}"  alt="Image to extract colour palette">
+    </div>
+    <div class="ColoursList">
+        <table>
+            <thead>
+              <tr>
+                <th>Colour</th>
+                <th>Code</th>
+                <th>Percentage</th>
+              </tr>
+            <thead>
+            <tbody>
+                {% for colour, percentage in colours %}
+                  <tr>
+                    <td style="background-color:#{{ colour }};"></td>
+                    <td>#{{ colour }}</td>
+                    <td>{{ percentage }}%</td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% include "header.html" %}
+
+  <main class="main">
+
+      <!-- Section Title -->
+      <div class="container section-title">
+        <br/><br/>
+          <br/><br/>
+        <h2>My Challenges</h2>
+        <h3>Ready to tackle the next challenge?</h3><br/>
+        <h4>This is a space for you to get things done.</h4>
+        <h5>Write down your tasks for the next 7 days.</h5>
+      </div><!-- End Section Title -->
+      <hr/>
+        <!-- Challenges forms Section -->
+        <section id="forms" class="forms section">
+            <!-- Create challenge form container -->
+            <div class="container create_challenge">
+                <form action="{{url_for('get_user_challenges', username=username)}}" method="post" class="create-challenge-form">
+                    {{ challenge_form.csrf_token }}
+                    <div class="row">
+                        {{ challenge_form.challenge_name(class="form-control", placeholder="Name your next challenge here") }}
+                    </div>
+                    <div class="row">
+                        {{ challenge_form.submit(type="submit", class="btn-submit") }}
+                    </div>
+                </form>
+            </div><!-- End container -->
+
+            <div class="container all_challenges">
+              <!-- Display all user challenges here -->
+              {% for challenge in challenges %}
+                <div class="col">
+                  <!-- Add a parent div to wrap both the forms to keep them together in the card -->
+                  <div class="card-container">
+                    <!-- Form for adding a new task -->
+                    <form action="{{ url_for('get_user_challenges', username=username) }}" method="post" class="add-task-form">
+                      <h3>{{ challenge.challenge_name }}</h3>
+                      <input type="hidden" name="action" value="add_task"> <!-- Add a hidden field to indicate task addition -->
+                      <input type="hidden" name="challenge_id" value="{{ challenge.id }}">
+                      <div class="form-row">
+                        {{ task_form.csrf_token }}
+                        {{ task_form.add_task(class="form-control", placeholder="Add new task here") }}
+                        <button type="submit" class="btn-submit">Add</button> <!-- Button to add task -->
+                      </div>
+                    </form>
+
+                    <br/>
+
+                    <!-- Form for saving task statuses -->
+                    <form action="{{ url_for('get_user_challenges', username=username) }}" method="post">
+                      <input type="hidden" name="action" value="update_tasks"> <!-- Add a hidden field to indicate task update -->
+                      <input type="hidden" name="challenge_id" value="{{ challenge.id }}">
+                      <div class="form-check">
+                        <ul class="task-list">
+                          {% for task in challenge.todos %}
+                            <li>
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="task_status_{{ task.id }}"
+                                id="task_{{ task.id }}"
+                                value="{{ task.id }}"
+                                {% if task.status %} checked {% endif %}
+                              >
+                              <label class="form-check-label" for="task_{{ task.id }}">
+                                {{ task.task }}
+                              </label>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                      <button type="submit" class="btn-save btn-submit">Save</button> <!-- Button to save task statuses -->
+                    </form>
+                  </div> <!-- Close card-container -->
+                </div>
+              {% else %}
+                <p>Create your first challenge!</p>
+              {% endfor %}
+            </div><!-- End container -->
+
+        </section><!-- Challenge Section -->
+
+  </main>
+
+{% include "footer.html" %}
+

@@ -1,0 +1,277 @@
+{% include 'header.html' %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shopping Cart</p>
+            </div>
+            <!-- Adding Flash when items have been added to the cart -->
+              <div class="flash-messages">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+              </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <form id="csrf-form" style="display:none;">
+        {{ form.csrf_token }}
+    </form>
+
+    <!-- Cart Start -->
+    {% if cart_items %}
+
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5">
+                <div class="col-lg-8 table-responsive mb-5">
+                    <table class="table table-bordered text-center mb-0">
+                        <thead class="bg-secondary text-dark">
+                            <tr>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                            {% for item in cart_items %}
+                            <tr data-product-id="{{ item.id }}">
+                                <td class="align-middle"><img src="{{ url_for('static', filename='img/' + item.image) }}" alt="" style="width: 50px;">
+                                    {{ item.name }}</td>
+                                <td class="align-middle">{{ item.price }}</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ item.quantity }}" id="qty-{{ item.id }}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle" id="total-{{ item.id }}">{{ "%.2f" % (item.price * item.quantity) }}</td>
+                                <td class="align-middle">
+                                    <button class="btn btn-sm btn-primary remove-from-cart" data-product-id="{{ item.id }}">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-4">
+                    <form class="mb-5" action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">Apply Coupon</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                <h6 class="font-weight-medium">Subtotal</h6>
+                                <h6 class="font-weight-medium" id="subtotal">${{ total_price }}</h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">${{ 10 }}</h6>
+                            </div>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold" id="grand-total">${{ "%.2f" % (total_price + 10) }}</h5>
+                            </div>
+                            <a href="{{ url_for('go_to_checkout') }}"><button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p> Your cart is empty. </p>
+    {% endif %}
+        <!-- Cart End -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get all quantity inputs and buttons
+    const quantityInputs = document.querySelectorAll('.quantity input');
+    const plusButtons = document.querySelectorAll('.btn-plus');
+    const minusButtons = document.querySelectorAll('.btn-minus');
+    const removeButtons = document.querySelectorAll('.btn-remove');
+
+    // Override plus button behavior
+    plusButtons.forEach(button => {
+        // Remove any existing click handlers
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+
+        // Add our custom handler
+        newButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const inputEl = this.closest('.quantity').querySelector('input');
+            const productId = inputEl.closest('tr').getAttribute('data-product-id');
+            let qty = parseInt(inputEl.value) || 1;
+            inputEl.value = qty + 1;
+            updateCartItem(productId, qty + 1);
+        });
+    });
+
+    // Override minus button behavior
+    minusButtons.forEach(button => {
+        // Remove any existing click handlers
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+
+        // Add our custom handler
+        newButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const inputEl = this.closest('.quantity').querySelector('input');
+            const productId = inputEl.closest('tr').getAttribute('data-product-id');
+            let qty = parseInt(inputEl.value) || 1;
+            if (qty > 1) {
+                inputEl.value = qty - 1;
+                updateCartItem(productId, qty - 1);
+            }
+        });
+    });
+
+    // Input change handling
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const productId = this.closest('tr').getAttribute('data-product-id');
+            let qty = parseInt(this.value) || 1;
+            if (qty < 1) {
+                qty = 1;
+                this.value = 1;
+            }
+            updateCartItem(productId, qty);
+        });
+    });
+
+    // Remove button handling
+    removeButtons.forEach(button => {
+        // Remove any existing click handlers
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+
+        // Add our custom handler
+        newButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const row = this.closest('tr');
+            const productId = row.getAttribute('data-product-id');
+            removeCartItem(productId);
+        });
+    });
+
+    // También agregar soporte para cualquier botón con la clase .remove-from-cart
+    const additionalRemoveButtons = document.querySelectorAll('.remove-from-cart');
+    additionalRemoveButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const productId = this.getAttribute('data-product-id');
+            removeCartItem(productId);
+        });
+    });
+
+    function updateCartItem(productId, quantity) {
+        fetch('/update_cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update row total
+                document.getElementById('total-' + productId).textContent = '$' + data.item_total;
+                // Update cart summary
+                document.getElementById('subtotal').textContent = '$' + data.subtotal;
+                document.getElementById('grand-total').textContent = '$' + data.grand_total;
+            }
+        });
+    }
+
+    function removeCartItem(productId) {
+        fetch('/remove_from_cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: JSON.stringify({
+                product_id: productId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remove the row from the table
+                document.querySelector(`tr[data-product-id="${productId}"]`).remove();
+
+                // Update cart summary
+                document.getElementById('subtotal').textContent = '$' + data.subtotal;
+                document.getElementById('grand-total').textContent = '$' + data.grand_total;
+
+                // If cart is empty, refresh the page to show empty cart message
+                if (data.cart_empty) {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
+    // Helper function to get CSRF token
+    function getCsrfToken() {
+        const csrfInput = document.querySelector('#csrf-form input[name="csrf_token"]');
+        if (csrfInput) {
+            return csrfInput.value;
+        }
+
+        // If Flask is using the default mechanism, we can extract from cookie
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'csrf_token') {
+                return value;
+            }
+        }
+
+        return '';
+    }
+});
+</script>
+
+{% include 'footer.html' %}

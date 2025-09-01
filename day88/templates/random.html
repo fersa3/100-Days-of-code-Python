@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Cafes{% endblock %}
+
+{% block content %}
+
+		<!-- Page Wrapper -->
+			<script src="static/js/jquery.min.js"></script>
+
+{% include 'header.html' %}
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Tarjeta de Café Random</h2>
+							<p>¿Qué te parece probar un café nuevo?</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+							<!-- Give me a random Cafe button -->
+							<section>
+									<ul class="actions fit" style="max-widht:1000px; padding-left:35%; padding-right:35%">
+										<li><a href="{{url_for('get_random_cafe')}}" class="button primary fit">Dame otro Café</a></li>
+									</ul>
+								</section>
+
+
+							<!-- Coffee Cards -->
+								<section>
+								   <div class="container">
+									  <div class="row" style="max-widht:10000px; padding-left:20%; padding-right:20%">
+										 <!--Profile Card 5-->
+										 <div class="col-md-12 mt-4">
+											 <a target="_blank" href={{ cafe.map_url }}>
+												<div class="card profile-card-5">
+												   <div class="card-img-block">
+													  <img class="card-img-top" src="{{ cafe.img_url }}" alt="Card image cap">
+												   </div>
+												   <div class="card-body pt-0">
+													  <h5 class="card-title">{{ cafe.name }}</h5>
+													  <p class="card-text">Amenities: 🔌🚽🛜📞<br/>
+															Coffee price: {{ cafe.coffee_price }}</p>
+													  <p class="card-text"><small class="text-muted">Ubicación: {{ cafe.location }}</small></p>
+												   </div>
+												</div>
+											</a>
+										 </div>
+									  </div>
+								   </div>
+								</section>
+
+
+							</div>
+						</section>
+					</article>
+
+				{% include 'footer.html' %}
+
+
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+{% endblock %}

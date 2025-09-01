@@ -1,0 +1,115 @@
+{% include "header.html" %}
+
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="hero-bg">
+        <img src="static/img/hero-bg-light.webp" alt="">
+      </div>
+      <div class="container text-center">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h1 data-aos="fade-up">Welcome to <span>7 day Challenges</span></h1>
+          <p data-aos="fade-up" data-aos-delay="100">Do you want to get better at something or get a new skill, but still feel like you don't have what it takes?<br></p>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+            <a href="{{url_for('home')}}#features" class="btn-get-started">Let's see how it works!</a>
+            <a href="https://www.youtube.com/watch?v=apy6jGoSxyM" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+          <br/>
+          <br/>
+          <img src="static/img/calendar1.png" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About "7 day challenges"</h2>
+        <p>Everyday is an opportunity to learn something new</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="row justify-content-between">
+
+          <div class="col-lg-5 d-flex align-items-center">
+
+            <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                  <i class="bi bi-binoculars"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">There's always something to get good at</h4>
+                    <p>
+                      What's that skill you want to gain, but still feel like you're not ready?
+                      We all feel that way. I'm bringing this strategy so you can learn whatever you want in 7 days.
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                  <i class="bi bi-box-seam"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">The planning</h4>
+                    <p>
+                      We just have 7 days. We won't get a master's degree in that time, but sure we can:
+                      <ul>
+                        <li>Set up the bases for a new buisness. </li>
+                        <li>Start learning a new musical instrument. </li>
+                        <li>Finally get that muscle up.</li>
+                      </ul>
+                      Trying something new or getting better at anything you do.
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                  <i class="bi bi-brightness-high"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">Consistency is key</h4>
+                    <p>
+                      Work smarter, not harder. For 7 days, you will spend 1-2 hours following a plan (made by you -
+                      for you!) to get better at that skill. Don't worry, I'll guide you through it.<br/>
+                      Log in, so you can give it a try!
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- End Tab Nav -->
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+              <div class="tab-pane fade active show" id="features-tab-1">
+                <img src="static/img/tabs-3.png" alt="" class="img-fluid">
+              </div><!-- End Tab Content Item -->
+
+              <div class="tab-pane fade" id="features-tab-2">
+                <img src="static/img/tabs-2.png" alt="" class="img-fluid">
+              </div><!-- End Tab Content Item -->
+
+              <div class="tab-pane fade" id="features-tab-3">
+                <img src="static/img/tabs-1.png" alt="" class="img-fluid">
+              </div><!-- End Tab Content Item -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+  </main>
+
+{% include "footer.html" %}

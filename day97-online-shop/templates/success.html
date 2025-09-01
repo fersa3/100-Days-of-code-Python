@@ -1,0 +1,69 @@
+{% include 'header.html' %}
+
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Payment Successful</h1>
+        <p class="m-0">Thank you for your purchase! Your payment has been processed successfully.</p>
+    </div>
+</div>
+
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Order Summary</h4>
+                </div>
+                <div class="card-body">
+                    <p class="mb-4">Order ID: <strong>{{ purchase.order_id }}</strong></p>
+                    <p class="mb-4">Date: <strong>{{ purchase.date }}</strong></p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center mb-0">
+                            <thead class="bg-secondary text-dark">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                {% for item in purchase.products %}
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="{{ url_for('static', filename='img/' + item.image) }}" alt="" style="width: 50px;">
+                                        {{ item.name }}
+                                    </td>
+                                    <td class="align-middle">{{ item.size }}</td>
+                                    <td class="align-middle">{{ item.color }}</td>
+                                    <td class="align-middle">${{ "%.2f" % item.price }}</td>
+                                    <td class="align-middle">{{ item.quantity }}</td>
+                                    <td class="align-middle">${{ "%.2f" % (item.price * item.quantity) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Total</h5>
+                        <h5 class="font-weight-bold">${{  "%.2f" % purchase.total }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <h5 class="font-weight-semi-bold mb-3">Thank you for your purchase!</h5>
+                <p>We will process your order and ship it as soon as possible.</p>
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="{{ url_for('home') }}" class="btn btn-primary py-2 px-4">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}

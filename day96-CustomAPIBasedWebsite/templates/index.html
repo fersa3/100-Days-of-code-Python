@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Virtual Art Gallery{% endblock %}
+
+{% block content %}
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				{% include 'header.html' %}
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<p>So you like art, but don't have time for museums right now?<br /><br />
+							Take a look at our</p>
+							<h2>Virtual Art Gallery</h2>
+							<p>Get a cup of coffee or a glass of wine and enjoy the experience</p>
+
+							<!--Form to select Art Movement-->
+							<form method="POST">
+								{{ form.hidden_tag() }}
+								<div style="max-widht:1000px; padding-left:20%; padding-right:20%">
+									{{ form.item_id() }}<br>
+									{% for error in form.item_id.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+									{% endfor %}
+									<ul class="actions special">
+										<li>{{ form.submit(class="primary") }}</li>
+									</ul>
+								</div>
+							</form>
+
+							{% if results %}
+							<h2>Results:</h2>
+							<ul>
+								{% for result in results %}
+								<li>{{ result }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+
+
+						</div>
+					</section>
+
+				{% include 'footer.html' %}
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrollex.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+{% endblock %}

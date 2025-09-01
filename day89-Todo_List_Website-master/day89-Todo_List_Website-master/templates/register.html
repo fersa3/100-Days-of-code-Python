@@ -1,0 +1,93 @@
+{% include "header.html" %}
+
+  <main class="main">
+
+
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <br/><br/>
+          <br/><br/>
+        <h2>Sign up</h2>
+        <p>Hello! Nice to have you around. Let's sign you up!</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Sing up Section -->
+    <section id="forms" class="forms section">
+        <div class="container section-signup" data-aos="fade-up">
+          <div class="col-lg-6">
+              <!-- Adding Flash message here for users trying to register twice -->
+              <div class="flash-messages">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+              </div>
+            <form action="{{url_for('register')}}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+              {{ form.csrf_token }}
+              <div class="row gy-4">
+                <!-- Name Field -->
+                <div class="col-md-12">
+                  {{ form.name(class="form-control", placeholder="Your name") }}
+                  {% if form.name.errors %}
+                      <ul class="errors">
+                          {% for error in form.name.errors %}
+                              <li>{{ error }}</li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}
+                </div>
+                <!-- Username Field -->
+                <div class="col-md-12">
+                  {{ form.username(class="form-control", placeholder="Create your username") }}
+                  {% if form.username.errors %}
+                      <ul class="errors">
+                          {% for error in form.username.errors %}
+                              <li>{{ error }}</li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}
+                </div>
+                <!-- Email Field -->
+                <div class="col-md-12">
+                  {{ form.email(class="form-control", placeholder="Your Email") }}
+                  {% if form.email.errors %}
+                      <ul class="errors">
+                          {% for error in form.email.errors %}
+                              <li>{{ error }}</li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}
+                </div>
+                <!-- Password Field -->
+                <div class="col-md-12">
+                  {{ form.password(class="form-control", placeholder="Password") }}
+                  {% if form.password.errors %}
+                      <ul class="errors">
+                          {% for error in form.password.errors %}
+                              <li>{{ error }}</li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}
+                </div>
+                <!-- Submit Button -->
+                {{ form.submit(type="submit", class="btn-submit") }}
+                </div>
+
+                  <!-- Loading, error, and sent messages placeholders -->
+                <div class="loading d-none">Loading...</div>
+                <div class="error-message d-none"></div>
+                <div class="sent-message d-none">Your message has been sent. Thank you!</div>
+            </form>
+          </div>
+        </div><!-- End Contact Form -->
+    </section><!-- /Sign up Section -->
+      </div>
+  </main>
+
+{% include "footer.html" %}

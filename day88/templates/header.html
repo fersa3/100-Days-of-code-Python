@@ -1,0 +1,19 @@
+<!-- Header -->
+      <header id="header" class="alt">
+          <h1><a href="index.html">Coffee & Wifi</a></h1>
+          <nav id="nav">
+              <ul>
+                  <li class="special">
+                      <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                      <div id="menu">
+                          <ul>
+                              <li><a href="{{url_for('home')}}">Inicio</a></li>
+                              <li><a href="{{url_for('all_cafes')}}">Mira todos los Cafés</a></li>
+                              <li><a href="{{url_for('add_cafe')}}">Agrega un nuevo Cafe</a></li>
+                              <li><a href="{{url_for('get_random_cafe')}}">Tarjeta de Cafe Random</a></li>
+                          </ul>
+                      </div>
+                  </li>
+              </ul>
+          </nav>
+      </header>
