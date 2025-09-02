@@ -5,7 +5,7 @@ My favorite projects from the course 100 Days of Code by Angela Yu
 
 ![Coffee Wifi](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day88-Coffee-Wifi-website/home.png)
 
-<h2>An Online Shop</h2>
+<h2>An Online Shop:</h2>
 
 ![Online shop](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day97-online-shop/checkout-successful.png)
 
