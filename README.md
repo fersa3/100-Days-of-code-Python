@@ -9,11 +9,14 @@ My favorite projects from the course 100 Days of Code by Angela Yu
 
 ![Online shop](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day97-online-shop/checkout-successful.png)
 
-<b>To do list website:</b><br/>
+<h2>To do list website:</h2>
+
 ![Todo list](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day89-Todo-List-Website-master/challenge-todo-list.png)
 
-<b>Space Invaders game:</b><br/>
+<h2>Space Invaders game:</h2>
+
 ![Space invaders](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day95-SpaceInvaders/space_invaders_go.png)
 
-<b>Colour palette generator:</b><br/>
+<h2>Colour palette generator:</h2>
+
 ![Colour palette](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day92-image-colour-palette-generator/palette_generator.png)
