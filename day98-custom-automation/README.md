@@ -11,5 +11,5 @@
 
 ![Home page](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day98-custom-automation/hours%20log.png)
 
-<b>About:</b> with Stripe:<br/>
+<b>On the web page:</b>:<br/>
 ![Home page](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day98-custom-automation/automated_hours_load.png)
