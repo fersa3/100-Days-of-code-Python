@@ -4,6 +4,8 @@ from tkinter import *
 from tkinter.ttk import *
 import time
 
+# I didn't save the finished version. TODO: See if I can do it again...
+
 # ---------------------------- CONSTANTS ------------------------------- #
 CREAM = "#FFF8E8"
 BEIGE = "#F7EED3"

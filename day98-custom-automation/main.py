@@ -114,7 +114,7 @@ if days_with_0_hours_message:
 page.check_select_all_checkbox()
 page.open_and_select_approver()
 # Uncomment the next line when ready to actually send the approval request
-page.click_send_approval_request()
+# page.click_send_approval_request()
 
 time.sleep(2)
 

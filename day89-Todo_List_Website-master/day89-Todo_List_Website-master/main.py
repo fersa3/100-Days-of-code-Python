@@ -207,7 +207,7 @@ def get_user_challenges(username):
 
 
 @app.route('/test', methods=["GET", "POST"])
-def test():
+def test_route():
     challenge_form = ChallengeForm()
     if challenge_form.validate_on_submit():
         challenge = challenge_form.challenge_name.data
