@@ -20,3 +20,7 @@ My favorite projects from the course 100 Days of Code by Angela Yu
 <h2>Colour palette generator:</h2>
 
 ![Colour palette](https://github.com/fersa3/100-Days-of-code-Python/raw/main/screenshots/day92-image-colour-palette-generator/palette_generator.png)
+
+
+## Branches:
+- 'render-setup-todo-website': Configuration setup to deply in Render my ToDo List proyect so I can stat using it for tracking my personal projects.
